@@ -38,7 +38,7 @@ This project requires the ArbolNegro Open Source Project to work (https://github
 (v1.0)This is an early stage of BlueMarble, it is fully functional, but not as I would like to.
 
 I want more components, more control over the ActionBar and TabBar, few tweeks on the Window system,
-a input textfield (there is a native input textfield provided by Adobe)
+an input textfield (there is a native input textfield provided by Adobe)
 
 - WARNING
 
