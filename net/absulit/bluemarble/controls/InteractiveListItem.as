@@ -32,9 +32,11 @@ package net.absulit.bluemarble.controls {
 		private var _id:uint;
 		private var _data:Object;
 		//private var _controlBackground:ControlBackground;
-		public function InteractiveListItem() {
+		public function InteractiveListItem(label:String, data:Object = null) {
 			super(/*400,SIDE*/);
 			init();
+			_label.text = label;
+			_data = data;
 			if (stage != null){
 				addedToStage();
 			}else{
