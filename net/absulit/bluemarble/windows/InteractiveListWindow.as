@@ -38,11 +38,11 @@ package net.absulit.bluemarble.windows {
 		}
 		
 		override public function destroy():void {
-			super.destroy();
-			stage.removeEventListener(Event.RESIZE, onResizeStage);
+			super.destroy();			
 			removeChild(_interactiveList);
 			_interactiveList.destroy();
 			_interactiveList = null;
+			stage.removeEventListener(Event.RESIZE, onResizeStage);
 		}
 		
 	}

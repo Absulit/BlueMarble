@@ -161,7 +161,6 @@ package net.absulit.bluemarble.controls {
 				Destroy(child).destroy();
 				child = null;
 			}
-			//System.gc();
 		}
 		
 	}
