@@ -28,10 +28,9 @@ package net.absulit.bluemarble.windows {
 			_interactiveList.width = width;
 			_interactiveList.height = height;
 			addChild(_interactiveList);
-			stage.addEventListener(Event.RESIZE, onResizeStage);
 		}
 		
-		private function onResizeStage(e:Event):void {
+		override protected function onResizeStage(e:Event):void {
 			_interactiveList.width = width;
 			_interactiveList.height = height;
 			_interactiveList.sort();
@@ -42,7 +41,6 @@ package net.absulit.bluemarble.windows {
 			removeChild(_interactiveList);
 			_interactiveList.destroy();
 			_interactiveList = null;
-			stage.removeEventListener(Event.RESIZE, onResizeStage);
 		}
 		
 	}

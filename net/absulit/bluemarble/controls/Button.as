@@ -195,8 +195,8 @@ package net.absulit.bluemarble.controls {
 			this.removeEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
 			this.removeEventListener(MouseEvent.MOUSE_UP, onMouseUp);	
 			
-			_label = null;	
 			removeChild(_label);
+			_label = null;			
 			_previousLabel = null;			
 			_tweenASelection = null;
 			_toggle = false;			

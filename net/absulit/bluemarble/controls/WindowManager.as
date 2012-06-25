@@ -99,7 +99,7 @@ package net.absulit.bluemarble.controls {
 				var offsetX:int = getOffsetX(value);
 				_circulaList.itemIndex = value;
 				_tabBar.getChildAt(_circulaList.itemIndex).dispatchEvent(new MouseEvent(MouseEvent.CLICK));
-				transition(offsetX, historyItem.data);
+				transition(offsetX, historyItem.data, historyItem.reference);
 			}else {
 				_backPressed = false;
 			}
@@ -266,7 +266,7 @@ package net.absulit.bluemarble.controls {
 			return _circulaList.itemIndex < index? -1:1;
 		}
 		
-		private function transition(offsetX:int, data:Object = null):void {
+		private function transition(offsetX:int, data:Object = null, reference:Window = null):void {
 			stage.frameRate = 60;
 			_tabBar.mouseEnabled = false;
 			_tabBar.mouseChildren = false;
@@ -278,15 +278,28 @@ package net.absulit.bluemarble.controls {
 			_currentWindow.fadeOut().addEventListener(TweenEvent.MOTION_FINISH, onMotionFinishCurrentWindow);
 			_currentWindow.mouseEnabled = false;		
 			//push on history
-			if(!_backPressed){
-				_history.push(new HistoryItem(_circulaList.indexOfItem(_currentWindow[ControlsConstants.CONSTRUCTOR]), _currentWindow.data));
+			if (!_backPressed) {
+				var referenceCache:Window = null;
+				if (_currentWindow.cache) {
+					referenceCache = _currentWindow;
+					trace("almacenado en CACHE",_currentWindow[ControlsConstants.CONSTRUCTOR]);
+				}
+				_history.push(new HistoryItem(_circulaList.indexOfItem(_currentWindow[ControlsConstants.CONSTRUCTOR]), _currentWindow.data, referenceCache));
 			}			
 			_backPressed = false;
 			//			
 			_previousWindow = _currentWindow;
 			
-			var WindowClass:Class = _circulaList.item;
-			_currentWindow = new WindowClass(_windowWidth, _windowHeight, data) as Window;
+			if (reference == null) {
+				var WindowClass:Class = _circulaList.item;
+				_currentWindow = new WindowClass(_windowWidth, _windowHeight, data) as Window;				
+			}else {
+				_currentWindow = reference;
+				_currentWindow.alpha = 1;
+				_currentWindow.x = 0;
+				_currentWindow.y = 0;
+			}
+
 			
 			/*****/			
 			windowDimensions();
@@ -406,7 +419,9 @@ package net.absulit.bluemarble.controls {
 					windowRemoved.destroy();
 					trace("destroy");
 			}*/
-			_previousWindow.destroy();
+			if(!_previousWindow.cache){
+				_previousWindow.destroy();
+			}
 			
 			stage.frameRate = _currentWindow.frameRate;
 			_tabBar.mouseEnabled = true;

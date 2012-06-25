@@ -25,9 +25,17 @@ package net.absulit.bluemarble.controls {
 	public class HistoryItem implements Destroy{
 		private var _index:int;
 		private var _data:Object;
-		public function HistoryItem(index:int,data:Object = null) {
+		private var _reference:Window;
+		/**
+		 * 
+		 * @param	index index of the window
+		 * @param	data the data passed to the window
+		 * @param	reference *WARNING* use this parameter only to recover the FULL Window, to not be rebuilt
+		 */
+		public function HistoryItem(index:int,data:Object = null, reference:Window = null) {
 			_index = index;
 			_data = data;
+			_reference = reference;
 		}
 		
 		public function get data():Object {
@@ -44,6 +52,16 @@ package net.absulit.bluemarble.controls {
 		
 		public function set index(value:int):void {
 			_index = value;
+		}
+		/**
+		 * *WARNING* Window reference to store as CACHE *Use with caution*
+		 */
+		public function get reference():Window {
+			return _reference;
+		}
+		
+		public function set reference(value:Window):void {
+			_reference = value;
 		}
 		
 		

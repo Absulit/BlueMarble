@@ -21,6 +21,7 @@ package net.absulit.bluemarble.controls {
 	import fl.transitions.Tween;
 	import fl.transitions.TweenEvent;
 	import flash.display.DisplayObject;
+	import flash.events.Event;
 	import net.absulit.arbolnegro.interfaces.Destroy;
 	import net.absulit.bluemarble.events.WindowEvent;
 	//import flash.system.System;
@@ -40,21 +41,37 @@ package net.absulit.bluemarble.controls {
 		protected var _frameRate:uint;
 		protected var _data:Object;
 		protected var _actionBar:ActionBar;
-		
+		protected var _cache:Boolean;
 		public function Window(width:int = 400, height:int = 400, data:Object = null) {
 			super(width, height);	
 			_data = data;
 			init();
+			if (stage != null){
+				addedToStage();
+			}else{
+				addEventListener(Event.ADDED_TO_STAGE, addedToStage);
+			}
 		}
 		
 		private function init():void {
-			_frameRate = 30
-
+			_frameRate = 30;
+			_cache = false;
 			//items inside must be reachable for interaction
 			_title = "undefined";
 			this.mouseChildren = true;
 			_actionBar = new ActionBar();
 		}
+		
+		
+		private function addedToStage(e:Event=null):void {
+			removeEventListener(Event.ADDED_TO_STAGE, addedToStage);
+			stage.addEventListener(Event.RESIZE, onResizeStage);
+		}
+		
+		protected function onResizeStage(e:Event):void {
+			
+		}
+
 	
 		public function fadeIn():Tween {
 			_tweenA = new Tween(this, "alpha", Strong.easeOut, 0, 1, 1, true);
@@ -149,6 +166,14 @@ package net.absulit.bluemarble.controls {
 			return _actionBar;
 		}
 		
+		public function get cache():Boolean {
+			return _cache;
+		}
+		
+		public function set cache(value:Boolean):void {
+			_cache = value;
+		}
+		
 		override public function destroy():void {
 			super.destroy();
 			_frameRate = NaN;
@@ -161,6 +186,7 @@ package net.absulit.bluemarble.controls {
 				Destroy(child).destroy();
 				child = null;
 			}
+			stage.removeEventListener(Event.RESIZE, onResizeStage);
 		}
 		
 	}
