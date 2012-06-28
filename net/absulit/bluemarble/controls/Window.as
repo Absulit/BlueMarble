@@ -72,8 +72,14 @@ package net.absulit.bluemarble.controls {
 			
 		}
 
-	
+		/**
+		 * Fade in from 0 alpha to 1
+		 * @return
+		 */
 		public function fadeIn():Tween {
+			/*if(_cache){
+				backFromCache();
+			}*/
 			_tweenA = new Tween(this, "alpha", Strong.easeOut, 0, 1, 1, true);
 			_tweenA.addEventListener(TweenEvent.MOTION_FINISH, onMotionFinishFadeIn);
 			return _tweenA;
@@ -174,6 +180,10 @@ package net.absulit.bluemarble.controls {
 			_cache = value;
 		}
 		
+		public function backFromCache():void {
+			
+		}
+		
 		override public function destroy():void {
 			super.destroy();
 			_frameRate = NaN;
@@ -188,6 +198,7 @@ package net.absulit.bluemarble.controls {
 			}
 			stage.removeEventListener(Event.RESIZE, onResizeStage);
 		}
+		
 		
 	}
 

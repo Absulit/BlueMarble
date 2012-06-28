@@ -47,6 +47,7 @@ package net.absulit.bluemarble.controls {
 		private var _portrait:Boolean;
 		private var _stageWidth:uint;
 		private var _stageHeight:uint;
+		private var _vars:Object;
 		public function WindowManager(pvt:SingletonEnforcer) {
 			super();
 			init();
@@ -58,6 +59,7 @@ package net.absulit.bluemarble.controls {
 		}
 		
 		private function init():void {
+			_vars = new Object();
 			_tabBar = new TabBar();		
 			//_tabBar.cacheAsBitmap = true;
 			//_tabBar.cacheAsBitmapMatrix = new Matrix();//send to hardware
@@ -244,6 +246,18 @@ package net.absulit.bluemarble.controls {
 			return _tabBar;
 		}
 		
+		public function get currentWindow():Window {
+			return _currentWindow;
+		}
+		
+		public function get vars():Object {
+			return _vars;
+		}
+		
+		public function set vars(value:Object):void {
+			_vars = value;
+		}
+		
 		public function setIndex(index:int, data:Object):void {
 			var value:int = index;	
 			var offsetX:int = getOffsetX(value);
@@ -295,6 +309,7 @@ package net.absulit.bluemarble.controls {
 				_currentWindow = new WindowClass(_windowWidth, _windowHeight, data) as Window;				
 			}else {
 				_currentWindow = reference;
+				//_currentWindow.backFromCache();
 				_currentWindow.alpha = 1;
 				_currentWindow.x = 0;
 				_currentWindow.y = 0;
@@ -323,6 +338,9 @@ package net.absulit.bluemarble.controls {
 			_currentWindow.swipeFrom(offsetX);
 			//_currentWindow.rotateFrom(offsetX);
 			_currentWindow.fadeIn();
+			if(_currentWindow.cache){
+				_currentWindow.backFromCache();
+			}
 		}
 		
 		private function replaceActionBar(value:ActionBar):void {
@@ -340,7 +358,6 @@ package net.absulit.bluemarble.controls {
 		}*/
 		
 		public function push(WindowClass:Class, title:String, visible:Boolean = true, iconPath:String = ""):void { 
-			trace("push");
 			if (WindowClass == null) throw new ArgumentError("WindowClass must not be null");
 			//getDefinitionByName(getQualifiedClassName(obj))
 			var window:Window
