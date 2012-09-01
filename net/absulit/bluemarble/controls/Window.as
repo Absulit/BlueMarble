@@ -26,9 +26,9 @@ package net.absulit.bluemarble.controls {
 	import net.absulit.bluemarble.events.WindowEvent;
 	//import flash.system.System;
 	
-	[Event(name="beforeExit",type="net.absulit.arbolnegro.events.WindowEvent")]
-	[Event(name="fadeInFinished",type="net.absulit.arbolnegro.events.WindowEvent")]
-	[Event(name="fadeOutFinished",type="net.absulit.arbolnegro.events.WindowEvent")]
+	[Event(name="beforeExit",type="net.absulit.bluemarble.events.WindowEvent")]
+	[Event(name="fadeInFinished",type="net.absulit.bluemarble.events.WindowEvent")]
+	[Event(name="fadeOutFinished",type="net.absulit.bluemarble.events.WindowEvent")]
 	/**
 	 * ...
 	 * @author Sebastian Sanabria Diaz
@@ -53,7 +53,7 @@ package net.absulit.bluemarble.controls {
 			}
 		}
 		
-		private function init():void {
+		protected function init():void {
 			_frameRate = 30;
 			_cache = false;
 			//items inside must be reachable for interaction
@@ -63,7 +63,7 @@ package net.absulit.bluemarble.controls {
 		}
 		
 		
-		private function addedToStage(e:Event=null):void {
+		protected function addedToStage(e:Event=null):void {
 			removeEventListener(Event.ADDED_TO_STAGE, addedToStage);
 			stage.addEventListener(Event.RESIZE, onResizeStage);
 		}

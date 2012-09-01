@@ -145,7 +145,8 @@ package net.absulit.bluemarble.controls {
 			stage.addEventListener(Event.RESIZE, onResizeStage);
 		}
 		
-		private function onResizeStage(e:Event):void {
+		private function onResizeStage(e:Event = null):void {
+			trace("onResizeStage WindowManager");
 			windowDimensions();		
 			_tabBar.y = stage.stageHeight - _tabBar.height
 			_tabBar.width = _windowWidth;
@@ -156,6 +157,11 @@ package net.absulit.bluemarble.controls {
 			_currentWindow.y = _windowY;*/
 			
 			sort();
+		}
+		
+		public function update():void {
+			trace("update");
+			onResizeStage();
 		}
 		
 		/**

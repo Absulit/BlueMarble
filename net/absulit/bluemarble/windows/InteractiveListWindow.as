@@ -2,6 +2,7 @@ package net.absulit.bluemarble.windows {
 	import flash.events.Event;
 	import net.absulit.bluemarble.controls.InteractiveList;
 	import net.absulit.bluemarble.controls.Window;
+	import net.absulit.bluemarble.events.InteractiveListEvent;
 	
 	/**
 	 * Just a Window with an InteractiveList
@@ -11,20 +12,20 @@ package net.absulit.bluemarble.windows {
 		protected var _interactiveList:InteractiveList;
 		public function InteractiveListWindow(width:int=400, height:int=400, data:Object=null) {
 			super(width, height, data);
-			init();
-			if (stage != null){
-				addedToStage();
-			}else{
-				addEventListener(Event.ADDED_TO_STAGE, addedToStage);
-			}
 		}
 		
-		private function init():void {
+		override protected function init():void {
+			super.init();
 			_interactiveList = new InteractiveList();
+			_interactiveList.addEventListener(InteractiveListEvent.SELECTED_ITEM_CHANGED, onSelectedItemChangedInteractiveList);
 		}
 		
-		private function addedToStage(e:Event=null):void {
-			removeEventListener(Event.ADDED_TO_STAGE, addedToStage);
+		protected function onSelectedItemChangedInteractiveList(e:InteractiveListEvent):void {
+			
+		}
+		
+		override protected function addedToStage(e:Event=null):void {
+			super.addedToStage(e);
 			_interactiveList.width = width;
 			_interactiveList.height = height;
 			addChild(_interactiveList);
