@@ -24,7 +24,7 @@ package net.absulit.bluemarble.windows {
 		
 		override protected function addedToStage(e:Event=null):void {
 			super.addedToStage(e);			
-			_stageWebView.viewPort = new Rectangle(0, _actionBar.height, width, height);
+			_stageWebView.viewPort = new Rectangle(0, y, width, height);
 			_stageWebView.addEventListener(Event.COMPLETE, onCompleteStageWebView);
 			
 		}
@@ -70,7 +70,7 @@ package net.absulit.bluemarble.windows {
 		
 		override protected function onResizeStage(e:Event):void {
 			super.onResizeStage(e);
-			_stageWebView.viewPort = new Rectangle(0, _actionBar.height, width, height);
+			_stageWebView.viewPort = new Rectangle(0, y, width, height);
 		}
 		
 		
