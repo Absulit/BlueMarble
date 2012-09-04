@@ -11,22 +11,17 @@ package net.absulit.bluemarble.windows {
 		protected var _content:Text;
 		public function TextWindow(width:int=400, height:int=400, data:Object=null) {
 			super(width, height, data);
-			init();
-			if (stage != null){
-				addedToStage();
-			}else{
-				addEventListener(Event.ADDED_TO_STAGE, addedToStage);
-			}
 		}
 		
-		private function init():void {
+		override protected function init():void {
+			super.init();
 			_content = new Text();
 			_content.multiline = true;
 			_content.wordWrap = true;
 		}
 		
-		private function addedToStage(e:Event=null):void {
-			removeEventListener(Event.ADDED_TO_STAGE, addedToStage);
+		override protected function addedToStage(e:Event=null):void {
+			super.addedToStage(e);
 			_content.x = ControlsConstants.TEXT_MARGIN;
 			_content.y = ControlsConstants.TEXT_MARGIN;
 			_content.width = width - (ControlsConstants.TEXT_MARGIN * 2);
