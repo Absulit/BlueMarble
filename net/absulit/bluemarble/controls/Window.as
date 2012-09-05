@@ -45,15 +45,10 @@ package net.absulit.bluemarble.controls {
 		public function Window(width:int = 400, height:int = 400, data:Object = null) {
 			super(width, height);	
 			_data = data;
-			init();
-			if (stage != null){
-				addedToStage();
-			}else{
-				addEventListener(Event.ADDED_TO_STAGE, addedToStage);
-			}
 		}
 		
-		protected function init():void {
+		override protected function init():void {
+			super.init();
 			_frameRate = 30;
 			_cache = false;
 			//items inside must be reachable for interaction
@@ -63,8 +58,8 @@ package net.absulit.bluemarble.controls {
 		}
 		
 		
-		protected function addedToStage(e:Event=null):void {
-			removeEventListener(Event.ADDED_TO_STAGE, addedToStage);
+		override protected function addedToStage(e:Event=null):void {
+			super.addedToStage(e);
 			stage.addEventListener(Event.RESIZE, onResizeStage);
 		}
 		

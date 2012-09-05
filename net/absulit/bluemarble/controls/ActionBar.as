@@ -32,22 +32,17 @@ package net.absulit.bluemarble.controls {
 		private var _llo:LiquidLayoutObject;
 		public function ActionBar() {
 			super(320,50);
-			init();
-			if (stage != null){
-				addedToStage();
-			}else{
-				addEventListener(Event.ADDED_TO_STAGE, addedToStage);
-			}
 		}
 		
-		private function init():void {
+		override protected function init():void {
+			super.init();
 			_title = new Text();
 			_title.selectable = false;
 			//_title.text ="eliminar luego"
 		}
 		
-		private function addedToStage(e:Event=null):void {
-			removeEventListener(Event.ADDED_TO_STAGE, addedToStage);
+		override protected function addedToStage(e:Event=null):void {
+			super.addedToStage(e);
 			if(_action != null){
 				_llo = new LiquidLayoutObject(_action, LiquidLayoutAlign.RIGHT, .1)
 			}

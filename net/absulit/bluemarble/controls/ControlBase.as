@@ -39,8 +39,7 @@ package net.absulit.bluemarble.controls {
 			super();
 			_width = width;
 			_height = height;		
-			init();
-			
+			init();			
 			if (stage != null){
 				addedToStage();
 			}else{
@@ -53,11 +52,11 @@ package net.absulit.bluemarble.controls {
 		/**
 		 * If pivot is null creates a new one
 		 */
-		private function init():void {
+		protected function init():void {
 			drawGraphics();
 		}
 		
-		private function addedToStage(e:Event = null):void {
+		protected function addedToStage(e:Event = null):void {
 			removeEventListener(Event.ADDED_TO_STAGE, addedToStage);	
 			//drawGraphics();
 		}

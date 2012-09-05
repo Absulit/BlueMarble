@@ -31,15 +31,10 @@ package net.absulit.bluemarble.controls {
 		private var _id:uint;
 		public function TabBarItem() {
 			super();
-			if (stage != null){
-				addedToStage();
-			}else{
-				addEventListener(Event.ADDED_TO_STAGE, addedToStage);
-			}
 		}
 		
-		private function addedToStage(e:Event=null):void {
-			removeEventListener(Event.ADDED_TO_STAGE, addedToStage);
+		override protected function addedToStage(e:Event=null):void {
+			super.addedToStage(e);
 			if(_thumb != null){
 				adjustThumb();
 			}

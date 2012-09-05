@@ -17,6 +17,7 @@
    */
 
 package net.absulit.bluemarble.controls {
+	import net.absulit.bluemarble.interfaces.InteractiveItem;
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -35,10 +36,9 @@ package net.absulit.bluemarble.controls {
 	 */
 
 	public class InteractiveList extends Grid implements Destroy{
-		private const CONS:String = "constructor";
-		private const ERR:String = "child must be InteractiveListItem Class";
+		private const ERR:String = "child must be InteractiveItem Class";
 		private var _selectedItemID:uint;
-		private var _selectedItem:InteractiveListItem;
+		private var _selectedItem:InteractiveItem;
 		private var _container:Container;
 		private var _drag:Boolean;
 		private var _mask:Sprite;
@@ -97,7 +97,7 @@ package net.absulit.bluemarble.controls {
 
 		
 		override public function addChild(child:DisplayObject):DisplayObject {
-			if (child[CONS] != InteractiveListItem ) {
+			if (!(child is InteractiveItem) ) {
 				throw new Error(ERR);
 			}
 			child.addEventListener(MouseEvent.CLICK, onClickChild);
@@ -105,7 +105,7 @@ package net.absulit.bluemarble.controls {
 		}
 		
 		override public function addChildAt(child:DisplayObject, index:int):flash.display.DisplayObject {
-			if (child[CONS] != InteractiveListItem ) {
+			if (!(child is InteractiveItem) ) {
 				throw new Error(ERR);
 			}
 			child.addEventListener(MouseEvent.CLICK, onClickChild);
@@ -114,8 +114,8 @@ package net.absulit.bluemarble.controls {
 		
 		private function onClickChild(e:MouseEvent):void {
 			if (!_drag) {
-				_selectedItem = InteractiveListItem(e.currentTarget);
-				_selectedItemID = getChildIndex(_selectedItem);
+				_selectedItem = InteractiveItem(e.currentTarget);
+				_selectedItemID = getChildIndex(DisplayObject(_selectedItem));
 				dispatchEvent(new InteractiveListEvent(InteractiveListEvent.SELECTED_ITEM_CHANGED));
 			}else {
 				_drag = false;
@@ -172,7 +172,7 @@ package net.absulit.bluemarble.controls {
 			return _selectedItemID;
 		}
 		
-		public function get selectedItem():InteractiveListItem {
+		public function get selectedItem():InteractiveItem {
 			return _selectedItem;
 		}
 		

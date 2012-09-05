@@ -20,12 +20,13 @@ package net.absulit.bluemarble.controls {
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import net.absulit.arbolnegro.interfaces.image.SimpleImageContained;
+	import net.absulit.bluemarble.interfaces.InteractiveItem;
 
 	/**
 	 * ...
 	 * @author Sebastian Sanabria Diaz
 	 */
-	public class InteractiveListItem extends Button {
+	public class InteractiveListItem extends Button implements InteractiveItem{
 		private var _thumb:SimpleImageContained;
 		private const SIDE:uint = 50;
 		private var _centerThumb:Boolean;
@@ -34,26 +35,21 @@ package net.absulit.bluemarble.controls {
 		//private var _controlBackground:ControlBackground;
 		public function InteractiveListItem(label:String, data:Object = null) {
 			super(/*400,SIDE*/);
-			init();
 			_label.text = label;
 			_data = data;
-			if (stage != null){
-				addedToStage();
-			}else{
-				addEventListener(Event.ADDED_TO_STAGE, addedToStage);
-			}
 		}
 		
 
 		
-		private function init():void {
+		override protected function init():void {
+			super.init();
 			width = 400;
 			height = SIDE;
 			_thumb = new SimpleImageContained();
 			_thumb.height = SIDE - 2;
 			_thumb.width = SIDE - 2;
 			_thumb.addEventListener(Event.COMPLETE, onCompleteThumb);
-			_label = new Text();
+			//_label = new Text();
 
 			super.width = _thumb.width + _label.width;
 			//super.width = this.parent.width;
@@ -61,8 +57,8 @@ package net.absulit.bluemarble.controls {
 			_centerThumb = true;
 		}
 		
-		private function addedToStage(e:Event = null):void {
-			removeEventListener(Event.ADDED_TO_STAGE, addedToStage);
+		override protected function addedToStage(e:Event = null):void {
+			super.addedToStage(e);
 			addChild(_label);
 			addChildAt(_thumb,0);
 		}

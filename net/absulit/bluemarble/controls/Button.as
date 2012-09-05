@@ -42,15 +42,10 @@ package net.absulit.bluemarble.controls {
 		//private var _selected:Boolean;
 		public function Button() {
 			super(100, 50);
-			init();
-			if (stage != null){
-				addedToStage();
-			}else{
-				addEventListener(Event.ADDED_TO_STAGE, addedToStage);
-			}
 		}
 		
-		private function init():void {
+		override protected function init():void {
+			super.init();
 			_label = new Text();
 			_label.text = ControlsConstants.UNDEFINED;
 			_label.selectable = false;
@@ -76,8 +71,8 @@ package net.absulit.bluemarble.controls {
 			buttonMode = true;
 		}
 
-		private function addedToStage(e:Event = null):void {
-			removeEventListener(Event.ADDED_TO_STAGE, addedToStage);			
+		override protected function addedToStage(e:Event = null):void {
+			super.addedToStage(e);			
 			addChild(_selection);
 			addChild(_notEnabled);
 			//_previousLabel = _label.text;
@@ -158,12 +153,7 @@ package net.absulit.bluemarble.controls {
 				_tweenASelection = new Tween(_selection, "alpha", Strong.easeIn, 1, 0, .5, true);
 				_tweenASelection.addEventListener(TweenEvent.MOTION_FINISH, onMotionFinish);
 			}*/
-		}
-		
-		override public function get width():Number {
-			return super.width;
-		}
-		
+		}		
 		override public function get height():Number {
 			return super.height;
 		}
@@ -172,6 +162,10 @@ package net.absulit.bluemarble.controls {
 			_selection.height = value;
 			_notEnabled.height = value;
 			super.height = value;
+		}
+		
+		override public function get width():Number {
+			return super.width;
 		}
 		
 		override public function set width(value:Number):void {
