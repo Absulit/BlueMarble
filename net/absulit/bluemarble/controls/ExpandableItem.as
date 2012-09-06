@@ -41,7 +41,7 @@ package net.absulit.bluemarble.controls {
 			_label.y = ControlsConstants.TEXT_MARGIN;
 			
 			var shadow:DropShadowFilter = new DropShadowFilter();
-			shadow.distance = 10;
+			shadow.distance = 0;
 			shadow.color = 0x000000;
 			shadow.blurX = 2;
 			shadow.blurY = 2;
