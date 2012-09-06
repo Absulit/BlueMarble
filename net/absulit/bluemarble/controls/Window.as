@@ -43,8 +43,8 @@ package net.absulit.bluemarble.controls {
 		protected var _actionBar:ActionBar;
 		protected var _cache:Boolean;
 		public function Window(width:int = 400, height:int = 400, data:Object = null) {
-			super(width, height);	
 			_data = data;
+			super(width, height);	
 		}
 		
 		override protected function init():void {
