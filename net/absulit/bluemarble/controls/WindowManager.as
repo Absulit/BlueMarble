@@ -24,6 +24,7 @@ package net.absulit.bluemarble.controls {
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
+	import flash.system.Capabilities;
 	import flash.ui.Keyboard;
 	import net.absulit.arbolnegro.data.CircularList;
 	/**
@@ -72,23 +73,25 @@ package net.absulit.bluemarble.controls {
 			_backPressed = false;
 			
 			NativeApplication.nativeApplication.addEventListener(KeyboardEvent.KEY_DOWN, onKeyboardEvent);
-			//NativeApplication.nativeApplication.systemIdleMode = SystemIdleMode.NORMAL;
-			
+			//NativeApplication.nativeApplication.systemIdleMode = SystemIdleMode.NORMAL;		
 		}
 		
 		private function onKeyboardEvent(e:KeyboardEvent):void {
-			switch (e.keyCode){
-				case Keyboard.BACK:
+			switch (e.keyCode) {
+				//case Keyboard.BACK:
+				case 0x01000016:
 					e.preventDefault();
 					back();
 					trace("Back key is pressed.");
-				break;
-				case Keyboard.MENU:
-				trace("Menu key is pressed.");
-				break;
-				case Keyboard.SEARCH:
-				trace("Search key is pressed.");
-				break;
+					break;
+				//case Keyboard.MENU:
+				case 0x01000012:
+					trace("Menu key is pressed.");
+					break;
+				//case Keyboard.SEARCH:
+				case 0x0100001F:
+					trace("Search key is pressed.");
+					break;
 			 }
 		}
 		
@@ -179,6 +182,8 @@ package net.absulit.bluemarble.controls {
 			_windowWidth = stage.stageWidth;
 			_windowHeight = stage.stageHeight - actionBarHeight - tabBarHeight;
 			_windowY = actionBarHeight;
+			trace("WindowManager.as, windowDimensions(), _windowWidth: ", _windowWidth);
+			trace("WindowManager.as, windowDimensions(), _windowHeight: ", _windowHeight);
 		}
 		
 		public static function get instance():WindowManager {
