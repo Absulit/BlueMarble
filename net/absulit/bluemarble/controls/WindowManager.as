@@ -150,16 +150,23 @@ package net.absulit.bluemarble.controls {
 		
 		private function onResizeStage(e:Event = null):void {
 			trace("onResizeStage WindowManager");
-			windowDimensions();		
-			_tabBar.y = stage.stageHeight - _tabBar.height
-			_tabBar.width = _windowWidth;
+			//windowDimensions();	
+			
+			sort();
+			//_tabBar.width = _windowWidth;
+			
+			_tabBar.y = stage.stageHeight - _tabBar.height;			
 			_actionBar.width = stage.stageWidth;
+			
+			
+			
+			
 			
 			/*_currentWindow.width = _windowWidth;
 			_currentWindow.height = _windowHeight;
 			_currentWindow.y = _windowY;*/
 			
-			sort();
+			
 		}
 		
 		public function update():void {
@@ -409,17 +416,23 @@ package net.absulit.bluemarble.controls {
 		}
 		
 		public function sort():void {
-			windowDimensions();
-			if(_currentWindow != null){
-				_currentWindow.width = _windowWidth;
-				_currentWindow.height = _windowHeight;
-				_currentWindow.y = _windowY;
-			}
-			if(_tabBar.numChildren != 0){
+						
+
+			if (_tabBar.numChildren != 0) {
+				_tabBar.width = stage.stageWidth;
 				_tabBar.sort();
 				_tabBar.y = stage.stageHeight - _tabBar.height
 			}
-			
+			windowDimensions();
+			if (_currentWindow != null) {
+				
+				//TODO no debería usar _windowWidth ni _windowHeight ya que no se actualizan al llamarlas (deberian ser propiedades o metodos get)
+				
+				_currentWindow.width = _windowWidth;
+				_currentWindow.height = _windowHeight;
+				_currentWindow.y = _windowY;
+				_tabBar.width = _windowWidth;
+			}
 		}
 		
 		private function onClickTabBarItem(e:MouseEvent):void {
