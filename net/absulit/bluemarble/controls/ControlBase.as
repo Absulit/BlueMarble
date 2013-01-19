@@ -17,15 +17,9 @@
    */
 
 package net.absulit.bluemarble.controls {
-	import flash.display.DisplayObject;
-	import flash.display.GradientType;
 	import flash.display.Sprite;
 	import flash.events.Event;
-	import flash.geom.Matrix;
-	import flash.geom.Vector3D;
-	//import flash.system.System;
 	import net.absulit.arbolnegro.interfaces.Destroy;
-	import net.absulit.arbolnegro.util.MathUtil;
 	/**
 	 * ...
 	 * @author Sebastian Sanabria Diaz
