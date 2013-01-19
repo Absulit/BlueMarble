@@ -27,6 +27,7 @@ package net.absulit.bluemarble.controls {
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Matrix;
+	import net.absulit.arbolnegro.data.DPIManager;
 	import net.absulit.arbolnegro.util.MathUtil;
 	/**
 	 * ...
@@ -41,7 +42,8 @@ package net.absulit.bluemarble.controls {
 		private var _toggle:Boolean;
 		//private var _selected:Boolean;
 		public function Button() {
-			super(100, 50);
+			//super(100, 50);
+			super(100, DPIManager.instance.cmToPxls(1));
 		}
 		
 		override protected function init():void {
@@ -159,9 +161,10 @@ package net.absulit.bluemarble.controls {
 		}
 		
 		override public function set height(value:Number):void {
-			_selection.height = value;
-			_notEnabled.height = value;
-			super.height = value;
+			//_selection.height = DPIManager.instance.recalibratePxls(value);
+			_selection.height =value;
+			_notEnabled.height = _selection.height;
+			super.height = _selection.height;
 		}
 		
 		override public function get width():Number {
@@ -169,9 +172,10 @@ package net.absulit.bluemarble.controls {
 		}
 		
 		override public function set width(value:Number):void {
+			//_selection.width = DPIManager.instance.recalibratePxls(value);
 			_selection.width = value;
-			_notEnabled.width = value;
-			super.width = value;
+			_notEnabled.width = _selection.width;
+			super.width = _selection.width;
 		}
 		
 		override public function get mouseEnabled():Boolean {

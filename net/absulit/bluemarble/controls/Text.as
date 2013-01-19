@@ -21,6 +21,7 @@ package net.absulit.bluemarble.controls
 	import flash.events.Event;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
+	import net.absulit.arbolnegro.data.DPIManager;
 	
 	/**
 	 * ...
@@ -30,7 +31,7 @@ package net.absulit.bluemarble.controls
 		//private static const COLOR:uint = 0xFF8000;
 		//private static const COLOR:uint = 0x0000ff;
 		private static const COLOR:uint = 0xffffff;
-		private static const SIZE:uint = 14;
+		private static const SIZE:uint = 8;
 		//private static const SIZE:uint = 50;
 		//private static const FONT:String = "Courier New";
 		private static const FONT:String = "Arial";
@@ -40,7 +41,9 @@ package net.absulit.bluemarble.controls
 		}
 
 		private function init():void {
-			this.defaultTextFormat = new TextFormat(FONT, SIZE, COLOR);
+			trace("Text size: ",DPIManager.instance.recalibratePxls(SIZE));
+			trace("Text 1cm: ",DPIManager.instance.cmToPxls(1));
+			this.defaultTextFormat = new TextFormat(FONT, DPIManager.instance.recalibratePxls(SIZE), COLOR);
 			//border = true;
 			//borderColor = 0xffffff;
 		}
@@ -51,7 +54,9 @@ package net.absulit.bluemarble.controls
 		
 		override public function set text(value:String):void {
 			super.text = value;
+			//this.width = DPIManager.instance.recalibratePxls( this.textWidth + 4);
 			this.width = this.textWidth + 4;
+			//this.height = DPIManager.instance.recalibratePxls( this.textHeight + 5);
 			this.height = this.textHeight + 5;
 			dispatchEvent(new Event(Event.CHANGE));
 		}

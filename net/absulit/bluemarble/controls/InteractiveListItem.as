@@ -19,6 +19,7 @@
 package net.absulit.bluemarble.controls {
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import net.absulit.arbolnegro.data.DPIManager;
 	import net.absulit.arbolnegro.interfaces.image.SimpleImageContained;
 	import net.absulit.bluemarble.interfaces.InteractiveItem;
 
@@ -28,7 +29,7 @@ package net.absulit.bluemarble.controls {
 	 */
 	public class InteractiveListItem extends Button implements InteractiveItem{
 		private var _thumb:SimpleImageContained;
-		private const SIDE:uint = 50;
+		private const SIDE:uint = DPIManager.instance.recalibratePxls(50);
 		private var _centerThumb:Boolean;
 		private var _id:uint;
 		private var _data:Object;

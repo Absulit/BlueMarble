@@ -19,6 +19,7 @@
 package net.absulit.bluemarble.controls {
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import net.absulit.arbolnegro.data.DPIManager;
 	import net.absulit.arbolnegro.layouts.LiquidLayoutAlign;
 	import net.absulit.arbolnegro.layouts.LiquidLayoutObject;
 	/**
@@ -31,7 +32,8 @@ package net.absulit.bluemarble.controls {
 		private var _action:Button;
 		private var _llo:LiquidLayoutObject;
 		public function ActionBar() {
-			super(320,50);
+			//super(320,50);
+			super(320,DPIManager.instance.cmToPxls(1));
 		}
 		
 		override protected function init():void {
